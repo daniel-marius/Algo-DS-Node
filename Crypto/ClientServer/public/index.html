@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="text-container">
+        <h2>Server public key</h2>
+        <textarea id="server_public"></textarea>
+      </div>
+      <div class="text-container">
+        <h2>Client public key</h2>
+        <textarea id="client_public"></textarea>
+      </div>
+      <div class="text-container">
+        <h2>Client private key</h2>
+        <textarea id="client_private"></textarea>
+      </div>
+      <div style="clear:" both”></div>
+    </div>
+    <div class="log-container">
+      <h1>Log container</h1>
+      <div id="log" style="padding-top:" 20px”></div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/client.js"></script>
+    <script src="./js/encoding.js"></script>
+    <script src="./js/encoding-indexes.js"></script>
+    <script src="./js/converter-wrapper.js"></script>
+    <script src="./js/rsaWrapper.js"></script>
+    <script src="./js/aesWrapper.js"></script>
+  </body>
+</html>

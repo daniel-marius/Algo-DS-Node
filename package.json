@@ -1,0 +1,38 @@
+{
+  "name": "algo_data_struct",
+  "version": "1.0.0",
+  "description": "- Arrays\r - Binary Search Trees\r - Design Patterns\r - Graphs\r - Hash Tables\r - Heaps\r - Linked Lists\r - Queues\r - Sets\r - Stacks\r - Trie",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielmarius1995/Algo-DS-Node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielmarius1995/Algo-DS-Node/issues"
+  },
+  "homepage": "https://github.com/danielmarius1995/Algo-DS-Node#readme",
+  "dependencies": {
+    "aes256": "^1.0.4",
+    "axios": "^0.20.0",
+    "big-integer": "^1.6.48",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "elliptic": "^6.5.3",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.1.3",
+    "helmet": "^4.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "node-forge": "^0.10.0",
+    "node-rsa": "^1.1.1",
+    "paillier-js": "^0.9.3",
+    "seedrandom": "^3.0.5",
+    "socket.io": "^2.3.0",
+    "xss-clean": "^0.1.1"
+  }
+}
