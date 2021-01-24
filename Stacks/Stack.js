@@ -1,7 +1,3 @@
-/**
- * Stack implementation in Node.js
- */
-
 class Stack {
   constructor() {
     this.count = 0;
@@ -86,44 +82,46 @@ class Stack {
   }
 }
 
-const myStack = new Stack();
+// const myStack = new Stack();
+//
+// myStack.push(1);
+// myStack.push(2);
+// myStack.push(3);
+// myStack.push(4);
+// myStack.push(5);
+// myStack.push(6);
+// myStack.push(7);
+// myStack.push(8);
+// myStack.push(9);
+//
+// console.log(myStack.pop());
+//
+// myStack.printStack();
+// console.log("\n");
+// myStack.reverseStack();
+//
+// // This is our stack
+// let letters = [];
+//
+// const word = "racecar"
+//
+// let rword = "";
+//
+// // Put letters of word into stack
+// for (let i = 0; i < word.length; i++) {
+//    letters.push(word[i]);
+// }
+//
+// // Pop off the stack in reverse order
+// for (let i = 0; i < word.length; i++) {
+//    rword += letters.pop();
+// }
+//
+// if (rword === word) {
+//    console.log(word + " is a palindrome.");
+// }
+// else {
+//    console.log(word + " is not a palindrome.");
+// }
 
-myStack.push(1);
-myStack.push(2);
-myStack.push(3);
-myStack.push(4);
-myStack.push(5);
-myStack.push(6);
-myStack.push(7);
-myStack.push(8);
-myStack.push(9);
-
-console.log(myStack.pop());
-
-myStack.printStack();
-console.log("\n");
-myStack.reverseStack();
-
-// This is our stack
-let letters = [];
-
-const word = "racecar"
-
-let rword = "";
-
-// Put letters of word into stack
-for (let i = 0; i < word.length; i++) {
-   letters.push(word[i]);
-}
-
-// Pop off the stack in reverse order
-for (let i = 0; i < word.length; i++) {
-   rword += letters.pop();
-}
-
-if (rword === word) {
-   console.log(word + " is a palindrome.");
-}
-else {
-   console.log(word + " is not a palindrome.");
-}
+module.exports = Stack;

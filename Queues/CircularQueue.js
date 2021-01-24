@@ -7,8 +7,16 @@ class CircularQueue {
     this.size = 0;
   }
 
+  getQueue() {
+    return this.queue;
+  }
+
+  getSize() {
+    return this.size;
+  }
+
   isEmpty() {
-    return this.size <= 0;
+    return this.size === 0;
   }
 
   enQueue(item) {
@@ -53,10 +61,6 @@ class CircularQueue {
       console.log("Queue is Empty!");
     }
     return this.queue[this.front];
-  }
-
-  getSize() {
-    return this.size;
   }
 
   resizeQueue() {

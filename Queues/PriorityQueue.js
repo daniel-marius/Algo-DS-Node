@@ -15,6 +15,10 @@ class PriorityQueue {
     console.log(this.collection);
   }
 
+  getCollection() {
+    return this.collection;
+  }
+
   enQueue(value) {
     if (this.isEmpty()) {
       this.collection.push(value);
@@ -35,9 +39,29 @@ class PriorityQueue {
     }
   }
 
+  enQueue2(node) {
+    if (this.isEmpty()) {
+      this.collection.push(node);
+    } else {
+      let added = false;
+      for (let i = 0; i < this.collection.length; i++) {
+        // index 1 defines the priority
+        if (node.getData()[1] < this.collection[i].getData()[1]) {
+          // adds value at index i
+          this.collection.splice(i, 0, node);
+          added = true;
+          break;
+        }
+      }
+      if (!added) {
+        this.collection.push(node);
+      }
+    }
+  }
+
   deQueue() {
     const value = this.collection.shift();
-    return value[0];
+    return value;
   }
 
   frontQueue() {
@@ -49,12 +73,14 @@ class PriorityQueue {
   }
 }
 
-let pq = new PriorityQueue();
-pq.enQueue(['Beau Carnes', 2]);
-pq.enQueue(['Quincy Larson', 3]);
-pq.enQueue(['Ewa Mitulska-Wójcik', 1])
-pq.enQueue(['Briana Swift', 2])
-pq.printCollection();
-pq.deQueue();
-console.log(pq.frontQueue());
-pq.printCollection();
+// let pq = new PriorityQueue();
+// pq.enQueue(['Beau Carnes', 2]);
+// pq.enQueue(['Quincy Larson', 3]);
+// pq.enQueue(['Ewa Mitulska-Wójcik', 1])
+// pq.enQueue(['Briana Swift', 2])
+// pq.printCollection();
+// pq.deQueue();
+// console.log(pq.frontQueue());
+// pq.printCollection();
+
+module.exports = PriorityQueue;

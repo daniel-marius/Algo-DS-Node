@@ -130,13 +130,15 @@ class SimpleLinkedList {
   }
 }
 
-let list = new SimpleLinkedList();
-list.addItem('list1');
-list.addItem('list2');
-list.addItem('list3');
-list.addItem('list4');
-console.log(list.listSize());
-console.log(list.removeItemAt(3));
-console.log(list.getItemAt(3));
-console.log(list.indexOf('list3'));
-console.log(list.listSize());
+// let list = new SimpleLinkedList();
+// list.addItem('list1');
+// list.addItem('list2');
+// list.addItem('list3');
+// list.addItem('list4');
+// console.log(list.listSize());
+// console.log(list.removeItemAt(3));
+// console.log(list.getItemAt(3));
+// console.log(list.indexOf('list3'));
+// console.log(list.listSize());
+
+module.exports = SimpleLinkedList;

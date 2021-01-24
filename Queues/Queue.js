@@ -34,11 +34,13 @@ class Queue {
   }
 }
 
-let q = new Queue();
-q.enQueue('a');
-q.enQueue('b');
-q.enQueue('c');
-q.printQueue();
-q.deQueue();
-console.log(q.frontQueue());
-q.printQueue();
+// let q = new Queue();
+// q.enQueue('a');
+// q.enQueue('b');
+// q.enQueue('c');
+// q.printQueue();
+// q.deQueue();
+// console.log(q.frontQueue());
+// q.printQueue();
+
+module.exports = Queue;

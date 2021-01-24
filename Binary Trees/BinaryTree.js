@@ -1,10 +1,9 @@
 const Node = require('./Node');
-const Stack = require('./Stack');
-const Queue = require('./Queue');
+const Stack = require('../Stacks/Stack');
+const Queue = require('../Queues/Queue');
 
-class BinTree {
+class BinaryTree {
   constructor() {
-    this.root = null;
     this.stack = new Stack();
     this.queue = new Queue();
 
@@ -13,30 +12,40 @@ class BinTree {
   }
 
   recursivePreOrder(root) {
-    this.root = root;
-    if (this.root != null) {
-      console.log(this.root.data + " ");
-      this.recursivePreOrder(this.root.left);
-      this.recursivePreOrder(this.root.right);
+    if (root != null) {
+      console.log(root.data);
+      this.recursivePreOrder(root.left);
+      this.recursivePreOrder(root.right);
     }
   }
 
   recursiveInOrder(root) {
-    this.root = root;
-    if (this.root != null) {
-      this.recursiveInOrder(this.root.left);
-      console.log(this.root.data + " ");
-      this.recursiveInOrder(this.root.right);
+    if (root != null) {
+      this.recursiveInOrder(root.left);
+      console.log(root.data + " ");
+      this.recursiveInOrder(root.right);
     }
   }
 
   recurisvePostOrder(root) {
-    this.root = root;
-    if (this.root != null) {
-      this.recurisvePostOrder(this.root.left);
-      this.recurisvePostOrder(this.root.right);
-      console.log(this.root.data + " ");
+    if (root != null) {
+      this.recurisvePostOrder(root.left);
+      this.recurisvePostOrder(root.right);
+      console.log(root.data + " ");
     }
+  }
+
+  huffmanEncoding(root, string) {
+    if (root === null) {
+      return;
+    }
+
+    if (root.left === null && root.right === null) {
+      console.log(String(root.getData())[0] + " | " + string)
+    }
+
+    this.huffmanEncoding(root.left, string + "0");
+    this.huffmanEncoding(root.right, string + "1");
   }
 
   nonRecursivePreOrder(root) {
@@ -45,21 +54,23 @@ class BinTree {
     // Then if the stack is empty, we leave the loop
     // Otherwise the top of the stack is popped out and the visit continues towards the right children
 
-    this.root = root;
+    if (!root) {
+      return;
+    }
+
     while (true) {
-      while (this.root.data) {
-        console.log(this.root);
-        this.stack.push(this.root);
-        this.root = this.root.left;
+      while (root.data) {
+        console.log(root.data);
+        this.stack.push(root);
+        root = root.left;
       }
 
       if (this.stack.isEmpty()) {
         break;
       }
 
-      this.root = this.stack.peekFirst();
-      this.stack.pop();
-      this.root = this.root.right;
+      root = this.stack.pop();
+      root = root.right;
     }
   }
 
@@ -69,23 +80,21 @@ class BinTree {
     // Otherwise the top of the stack pops out and the current node is visited
     // Finally the visit continues towards the right children
 
-    this.root = root;
     while (true) {
-      while(this.root) {
-        this.stack.push(this.root);
-        this.root = this.root.left;
+      while(root) {
+        this.stack.push(root);
+        root = root.left;
       }
 
       if (this.stack.isEmpty()) {
         break;
       }
 
-      this.root = this.stack.top();
-      this.stack.pop();
+      root = this.stack.pop();
 
-      console.log(this.root.data);
+      console.log(root.data);
 
-      this.root = this.root.right;
+      root = root.right;
     }
   }
 
@@ -95,49 +104,81 @@ class BinTree {
     // order to differentiate the two cases, we can compare if the current element and the
     // right child of the element at the top of the stack are the same.
 
-    this.root = root;
     while (true) {
-      if (this.root) {
-        this.stack.push(this.root);
-        this.root = this.root.left;
+      if (root) {
+        this.stack.push(root);
+        root = root.left;
       } else {
         if (this.stack.isEmpty()) {
           break;
-        } else if (!this.stack.top().right) {
-          this.root = this.stack.top();
-          this.stack.pop();
-          console.log(this.root.data);
+        } else if (!this.stack.peekFirst().right) {
+          root = this.stack.pop();
+          console.log(root.data);
 
-          if (this.root === this.stack.top().right) {
-            console.log(this.stack.top().right);
+          if (root === this.stack.peekFirst().right) {
+            console.log(this.stack.peekFirst().right);
             this.stack.pop();
           }
         }
         if (!this.stack.isEmpty()) {
-          this.root = this.stack.top().right;
+          root = this.stack.peekFirst().right;
         } else {
-          this.root = null;
+          root = null;
         }
       }
     }
   }
 
   nonRecursiveLevelOrder(root) {
-    let tmp = null;
-    this.root = root;
-    this.queue.enQueue(this.root);
-
-    while (!this.queue.isEmpty()) {
-      tmp = this.queue.frontQueue();
-      this.queue.deQueue();
-      console.log(tmp.data);
-      if (tmp.left) {
-        this.queue.enQueue(tmp.left);
-      }
-      if (tmp.right) {
-        this.queue.enQueue(tmp.right);
-      }
+    if (root === null) {
+      return;
     }
+
+    this.queue.enQueue(root);
+
+    let tree = [];
+
+    let level = 1;
+    let width = -1;
+
+    while (true) {
+      let nodeCount = this.queue.size();
+
+      if (nodeCount === 0) {
+        break;
+      }
+
+      while (nodeCount > 0) {
+        let tmp = this.queue.frontQueue();
+        console.log("Level:", level, "NodeCount:", nodeCount, "Data:", tmp.data);
+        this.queue.deQueue();
+
+        let line = { level: level, data: tmp.data };
+        tree.push(line);
+
+        if (nodeCount > width) {
+          width = Math.max(nodeCount, width);
+        }
+
+        if (tmp.left) {
+          this.queue.enQueue(tmp.left);
+        }
+
+        if (tmp.right) {
+          this.queue.enQueue(tmp.right);
+        }
+
+        nodeCount -= 1;
+      }
+      console.log('\n');
+      level += 1;
+    }
+
+    console.log('Tree Height:', level - 1);
+    console.log('Tree Width:', width);
+
+    const res = tree.filter(node => (node.data ? node.level === width : {}));
+    console.log("Level with most nodes:", res);
   }
 
   printZigZag(root) {
@@ -148,9 +189,7 @@ class BinTree {
       return;
     }
 
-    this.root = root;
-
-    this.currLevel.push(this.root);
+    this.currLevel.push(root);
 
     while (!this.currLevel) {
       tmp = this.currLevel.top();
@@ -185,8 +224,7 @@ class BinTree {
       return count;
     }
 
-    this.root = root;
-    this.queue.enQueue(this.root);
+    this.queue.enQueue(root);
 
     while (!this.queue.isEmpty()) {
       tmp = this.queue.frontQueue();
@@ -210,15 +248,14 @@ class BinTree {
       return;
     }
 
-    this.root = root;
-    pathArr.push(this.root.data);
+    pathArr.push(root.data);
 
     // Every time we reach a leaf, the vector is printed
-    if (!this.root.left && !this.root.right) {
+    if (!root.left && !root.right) {
       print(pathArr);
     } else {
-      printAllPaths(this.root.left, path);
-      printAllPaths(this.root.right, path);
+      printAllPaths(root.left, path);
+      printAllPaths(root.right, path);
     }
 
     // remove current node after left and right subtree are done
@@ -230,17 +267,15 @@ class BinTree {
       return NULL;
     }
 
-    this.root = root;
-
-    if (this.root === node1 || this.root || node2) {
-      return this.root.data;
+    if (root === node1 || root || node2) {
+      return root.data;
     }
 
-    let left = this.lca(this.root.left, node1, node2);
-    let right = this.lca(this.root.right, node1, node2);
+    let left = this.lca(root.left, node1, node2);
+    let right = this.lca(root.right, node1, node2);
 
     if (left && right) {
-      return this.root.data;
+      return root.data;
     } else {
       return (left ? left : right);
     }
@@ -251,9 +286,7 @@ class BinTree {
       return 0;
     }
 
-    this.root = root;
-
-    return 1 + Math.max(this.height(this.root.left), this.height(this.root.right));
+    return 1 + Math.max(this.height(root.left), this.height(root.right));
   }
 
   treeDiameter(root) {
@@ -261,13 +294,11 @@ class BinTree {
       return 0;
     }
 
-    this.root = root;
+    let leftHeight = this.treeHeight(root.left);
+    let rightHeight = this.treeHeight(root.right);
 
-    let leftHeight = this.treeHeight(this.root.left);
-    let rightHeight = this.treeHeight(this.root.right);
-
-    let leftDiameter = this.treeDiameter(this.root.left);
-    let rightDiameter = this.treeDiameter(this.root.right);
+    let leftDiameter = this.treeDiameter(root.left);
+    let rightDiameter = this.treeDiameter(root.right);
 
     return Math.max(leftHeight + rightHeight + 1, Math.max(leftDiameter, rightDiameter));
   }
@@ -277,9 +308,8 @@ class BinTree {
       return 0;
     }
 
-    this.root = root;
-    let leftHeight = this.treeHeight2(this.root.left, answer);
-    let rightHeight = this.treeHeight2(this.root.right, answer);
+    let leftHeight = this.treeHeight2(root.left, answer);
+    let rightHeight = this.treeHeight2(root.right, answer);
 
     answer = Math.max(answer, 1 + leftHeight + rightHeight);
 
@@ -291,10 +321,8 @@ class BinTree {
       return 0;
     }
 
-    this.root = root;
-
     let answer = -100000;
-    let heightTree = this.treeHeight2(this.root, answer);
+    let heightTree = this.treeHeight2(root, answer);
 
     return answer;
   }
@@ -304,10 +332,11 @@ class BinTree {
     if (index < array.length) {
       let node = new Node(array[index]);
       root = node;
-      this.root = root;
-      this.root.left = this.insertLevelOrder(array, this.root.left, 2 * index + 1);
-      this.root.right = this.insertLevelOrder(array, this.root.right, 2 * index + 2);
+      root.left = this.insertLevelOrder(array, root.left, 2 * index + 2);
+      root.right = this.insertLevelOrder(array, root.right, 2 * index + 1);
     }
-    return this.root;
+    return root;
   }
 }
+
+module.exports = BinaryTree;

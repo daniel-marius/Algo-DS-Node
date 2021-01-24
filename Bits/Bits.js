@@ -13,7 +13,10 @@ class Bits {
     return (x && !(x & (x - 1)));
   }
 
-  // Count the number of ones in the binary representation of the given number
+  /**
+  * Count the number of ones in the binary representation of the given number.
+  *
+  */
   countOne(x) {
     let count = 0;
     while (x > 0) {
@@ -23,12 +26,18 @@ class Bits {
     return count;
   }
 
-  // Count number of bits needed to be flipped to convert x to y
+  /**
+  * Count number of bits needed to be flipped to convert x to y.
+  *
+  */
   flippedCount(x, y) {
     return countOne(x^y);
   }
 
-  //  Check if the ith bit is set in the binary form of the given number
+  /**
+  * Check if the ith bit is set in the binary form of the given number.
+  *
+  */
   check(x, i) {
     // 2^i as 1 << i
     return (x & (1 << i)) ? true : false;
@@ -46,7 +55,10 @@ class Bits {
     }
   }
 
-  // Find the largest power of 2 (most significant bit in binary form), which is less than or equal to the given number.
+  /**
+  * Returns the largest power of 2 (most significant bit in binary form), which is less than or equal to the given number.
+  *
+  */
   largestPower(x) {
 
     // Change all the bits which are at the right side of the most significant digit, to 1.
@@ -59,7 +71,10 @@ class Bits {
     return (x + 1) >> 1;
   }
 
-  // Returns bit length of the integer x
+  /**
+  * Returns bit length of the integer x.
+  *
+  */
   nbits(x) {
     let r = 1, t;
     if ((t = x >> 16) != 0) { x = t; r += 16; }
@@ -98,46 +113,70 @@ class Bits {
     return (x & 1) ? 'Odd' : 'Even';
   }
 
-  // Returns the rightmost 1 in binary representation of x.
+  /**
+  * Returns the rightmost 1 in binary representation of x.
+  *
+  */
   trick1(x) {
     return x ^ ( x & (x-1));
   }
 
-  // Returns the rightmost 1 in binary representation of x.
+  /**
+  * Returns the rightmost 1 in binary representation of x.
+  *
+  */
   trick2(x) {
     return x & (-x);
   }
 
-  // Returns the number x with the nth bit set.
+  /**
+  * Returns the number x with the nth bit set.
+  *
+  */
   trick3(x, n) {
     return x | (1 << n);
   }
 
-  // Divide by 2
+  /**
+  * Divide by 2.
+  *
+  */
   trick4(x) {
     return x >>= 1;
   }
 
-  // Multiplying by 2
+  /**
+  * Multiplying by 2.
+  *
+  */
   trick5(x) {
     return x <<= 1;
   }
 
-  // Clear all bits from LSB to ith bit
+  /**
+  * Clear all bits from LSB to ith bit.
+  *
+  */
   trick6(x) {
     const mask = ~((1 << i+1 ) - 1);
     x &= mask;
     return x;
   }
 
-  // Clearing all bits from MSB to i-th bit
+  /**
+  * Clearing all bits from MSB to i-th bit.
+  *
+  */
   trick7(x) {
     const mask = (1 << i) - 1;
     x &= mask;
     return x;
   }
 
-  // Find log base 2 of 32 bit integer
+  /**
+  * Find log base 2 of 32 bit integer.
+  *
+  */
   log2(x) {
     let res = 0;
     while (x >>= 1) {
@@ -146,8 +185,10 @@ class Bits {
     return res;
   }
 
-  // Converting a 32-bit JavaScript integer into 256-bit BE
-  // Returns a string whose characters are the bytes of the integer
+  /**
+  * Converting a 32-bit JavaScript integer into 256-bit BE.
+  * Returns a string whose characters are the bytes of the integer.
+  */
   intTo256BigEndianString(n) {
     let result = '';
 
@@ -163,8 +204,10 @@ class Bits {
     return result;
   }
 
-  // JavaScript integers can be represented as 32bits.
-  // We just need to read them as 8bit sequences and convert them to a string.
+  /**
+  * JavaScript integers can be represented as 32bits.
+  * We just need to read them as 8bit sequences and convert them to a string.
+  */
   intToBE1(x) {
     return [
       x >> 24,
